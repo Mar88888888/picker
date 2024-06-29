@@ -150,11 +150,11 @@
   <div class="form-container">
     <form method="GET" action="/">
       <label for="minRating">Min Rating:</label>
-      <input type="number" id="minRating" name="minRating" required value="<%= minRating || '' %>">
+      <input type="number" id="minRating" name="minRating" required value="<%= minRating || '0' %>">
       <label for="maxRating">Max Rating:</label>
-      <input type="number" id="maxRating" name="maxRating" required value="<%= maxRating || '' %>">
+      <input type="number" id="maxRating" name="maxRating" required value="<%= maxRating || '99' %>">
       <label for="numPlayers">Number of Players:</label>
-      <input type="number" id="numPlayers" name="numPlayers" required value="<%= numPlayers || '' %>">
+      <input type="number" id="numPlayers" name="numPlayers" required value="<%= numPlayers || '3' %>">
       <button type="submit">Go</button>
     </form>
   </div>

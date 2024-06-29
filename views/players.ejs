@@ -68,22 +68,24 @@
     }
 
     .gold {
-        background: linear-gradient(45deg, #e6c20c, #fad503);
-        color: #000000;
-        padding: 10px;
-        border-radius: 5px;
+      background: linear-gradient(45deg, #e6c20c, #fad503);
+      color: #000000;
+      padding: 10px;
+      border-radius: 5px;
     }
+
     .silver {
-        background: linear-gradient(45deg, #C0C0C0, #A9A9A9);
-        color: #000000;
-        padding: 10px;
-        border-radius: 5px;
+      background: linear-gradient(45deg, #C0C0C0, #A9A9A9);
+      color: #000000;
+      padding: 10px;
+      border-radius: 5px;
     }
+
     .bronze {
-        background: linear-gradient(45deg, #d1863c, #d4742f);
-        color: #000000;
-        padding: 10px;
-        border-radius: 5px;
+      background: linear-gradient(45deg, #d1863c, #d4742f);
+      color: #000000;
+      padding: 10px;
+      border-radius: 5px;
     }
 
     .rating {
@@ -148,11 +150,11 @@
   <div class="form-container">
     <form method="GET" action="/">
       <label for="minRating">Min Rating:</label>
-      <input type="number" id="minRating" name="minRating" required>
+      <input type="number" id="minRating" name="minRating" required value="<%= minRating || '' %>">
       <label for="maxRating">Max Rating:</label>
-      <input type="number" id="maxRating" name="maxRating" required>
+      <input type="number" id="maxRating" name="maxRating" required value="<%= maxRating || '' %>">
       <label for="numPlayers">Number of Players:</label>
-      <input type="number" id="numPlayers" name="numPlayers" required>
+      <input type="number" id="numPlayers" name="numPlayers" required value="<%= numPlayers || '' %>">
       <button type="submit">Go</button>
     </form>
   </div>
@@ -198,7 +200,7 @@
             <p>SPD: <%= player.Defending %>
             </p>
             <p>POS: <%= player.Physicality %>
-
+            </p>
             <% } else { %>
               <p>PAC: <%= player.Pace %>
               </p>

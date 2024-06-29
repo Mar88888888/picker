@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Player List</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      background-color: rgba(0, 128, 0, 0.208);
+    }
+
+    .form-container {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .form-container input,
+    .form-container button {
+      margin: 0 10px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    .form-container input:focus {
+      outline: none;
+      border-color: #007bff;
+    }
+
+    .form-container button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    .form-container button:hover {
+      background-color: #0056b3;
+    }
+
+    .cards-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .card {
+      width: 220px;
+      height: 320px;
+      margin: 15px;
+      padding: 20px;
+      text-align: center;
+      color: black;
+      position: relative;
+      font-family: 'Arial', sans-serif;
+      background-color: #ffd700;
+      clip-path: polygon(0% 7%, 5% 5.5%, 10% 2.5%, 18% 0%, 82% 0%, 90% 2.5%, 94.5% 5.5%, 100% 7%, 100% 90%, 50% 100%, 0% 90%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .gold {
+        background: linear-gradient(45deg, #e6c20c, #fad503);
+        color: #000000;
+        padding: 10px;
+        border-radius: 5px;
+    }
+    .silver {
+        background: linear-gradient(45deg, #C0C0C0, #A9A9A9);
+        color: #000000;
+        padding: 10px;
+        border-radius: 5px;
+    }
+    .bronze {
+        background: linear-gradient(45deg, #d1863c, #d4742f);
+        color: #000000;
+        padding: 10px;
+        border-radius: 5px;
+    }
+
+    .rating {
+      font-size: 2.5em;
+      font-weight: bold;
+      color: rgb(21, 20, 20);
+      position: absolute;
+      top: 35px;
+      left: 20px;
+    }
+
+    .position {
+      font-size: 1.5em;
+      font-weight: bold;
+      color: rgb(31, 28, 28);
+      position: absolute;
+      top: 35px;
+      right: 20px;
+    }
+
+    .club-nation {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 60px;
+      font-size: 1em;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .nation {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .name {
+      font-size: 1.5em;
+      font-weight: bold;
+      margin: 10px 0;
+      line-height: 1.5em;
+      height: 3em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .attributes {
+      font-size: 0.9em;
+      display: flex;
+      justify-content: space-around;
+      margin-top: 10px;
+    }
+
+    .attributes p {
+      margin: 5px 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="form-container">
+    <form method="GET" action="/players">
+      <label for="minRating">Min Rating:</label>
+      <input type="number" id="minRating" name="minRating" required 
+        value="0">
+      <label for="maxRating">Max Rating:</label>
+      <input type="number" id="maxRating" name="maxRating" required
+        value="99">
+      <label for="numPlayers">Number of Players:</label>
+      <input type="number" id="numPlayers" name="numPlayers" required
+        value="3">
+      <button type="submit">Go</button>
+    </form>
+  </div>
+  <div class="cards-container">
+    <% players.forEach(player=> { %>
+      <div class="card 
+        <% if (player.Overall >= 40 && player.Overall <= 64) { %>
+          bronze
+        <% } else if (player.Overall >= 65 && player.Overall <= 74) { %>
+          silver
+        <% } else if (player.Overall >= 75 && player.Overall <= 91) { %>
+          gold
+        <% } %>
+      ">
+        <div class="rating">
+          <%= player.Overall %>
+        </div>
+        <div class="position">
+          <%= player.Position %>
+        </div>
+        <div class="club-nation">
+          <div class="nation">
+            <img src="https://flagcdn.com/h20/<%= player.NationISOCode %>.png" alt="<%= player.Nation %> flag">
+            <%= player.Nation %>
+          </div>
+          <div class="club">
+            <%= player.Club %>
+          </div>
+        </div>
+        <div class="name">
+          <%= player.Name %>
+        </div>
+        <div class="attributes">
+          <% if (player.Position==='GK' ) { %>
+            <p>DIV: <%= player.Pace %>
+            </p>
+            <p>HAN: <%= player.Shooting %>
+            </p>
+            <p>KIC: <%= player.Passing %>
+            </p>
+            <p>REF: <%= player.Dribbling %>
+            </p>
+            <p>SPD: <%= player.Defending %>
+            </p>
+            <p>POS: <%= player.Physicality %>
+
+            <% } else { %>
+              <p>PAC: <%= player.Pace %>
+              </p>
+              <p>SHO: <%= player.Shooting %>
+              </p>
+              <p>PAS: <%= player.Passing %>
+              </p>
+              <p>DRI: <%= player.Dribbling %>
+              </p>
+              <p>DEF: <%= player.Defending %>
+              </p>
+              <p>PHY: <%= player.Physicality %>
+              </p>
+              <% } %>
+        </div>
+      </div>
+      <% }) %>
+  </div>
+</body>
+
+</html>

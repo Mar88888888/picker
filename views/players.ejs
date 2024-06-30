@@ -65,6 +65,8 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      opacity: 0;
+      transform: translateY(20px);
     }
 
     .gold {
@@ -143,6 +145,22 @@
     .attributes p {
       margin: 5px 0;
     }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .fade-in-up {
+      animation: fadeInUp 1s ease forwards;
+    }
   </style>
 </head>
 
@@ -167,8 +185,7 @@
           silver
         <% } else if (player.Overall >= 75 && player.Overall <= 91) { %>
           gold
-        <% } %>
-      ">
+        <% } %>">
         <div class="rating">
           <%= player.Overall %>
         </div>
@@ -219,6 +236,27 @@
       </div>
       <% }) %>
   </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const cards = document.querySelectorAll('.card');
+      if(cards.length < 6){
+        cards.forEach((card, index) => {
+          card.style.opacity = 0;
+          card.style.transform = 'translateY(20px)';
+          setTimeout(() => {
+            card.classList.add('fade-in-up');
+          }, index * 500); 
+        });
+      }
+      else{
+        cards.forEach((card, index) => {
+          card.style.opacity = 1;
+          card.style.transform = 'translateY(20px)';
+        });
+      }
+    });
+  </script>
 </body>
 
 </html>

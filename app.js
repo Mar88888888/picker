@@ -253,7 +253,7 @@ fs.createReadStream(csvFilePath)
 
 app.get('/', (req, res) => {
   let filteredPlayers = players;
-  const { minRating, maxRating, numPlayers } = req.query;
+  const { minRating, maxRating, numPlayers, position } = req.query;
 
   if (minRating && maxRating && numPlayers) {
     const min = parseInt(minRating, 10);
@@ -265,19 +265,28 @@ app.get('/', (req, res) => {
       return rating >= min && rating <= max;
     });
 
+    if (position) {
+      const positionArray = Array.isArray(position) ? position : [position];
+      filteredPlayers = filteredPlayers.filter(player => positionArray.includes(player.Position));
+    }
+
     filteredPlayers = filteredPlayers.sort(() => 0.5 - Math.random()).slice(0, num);
-    filteredPlayers.forEach(player => {
-      player.NationISOCode = getCountryISOCode(player.Nation);
-    });
   }
+
+
+  filteredPlayers.forEach(player => {
+    player.NationISOCode = getCountryISOCode(player.Nation);
+  });
 
   res.render('players', {
     players: filteredPlayers,
     minRating: minRating,
     maxRating: maxRating,
-    numPlayers: numPlayers
+    numPlayers: numPlayers,
+    position: position
   });
 });
+
 
 app.listen(PORT, () => {
   console.log(`Server is running on  port ${PORT}`);

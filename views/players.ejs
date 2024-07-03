@@ -166,32 +166,33 @@
 
 <body>
   <div class="form-container">
-    <form method="GET" action="/">
-      <div>
-        <label><input type="checkbox" name="position" value="GK"> GK</label>
-        <label><input type="checkbox" name="position" value="CB"> CB</label>
-        <label><input type="checkbox" name="position" value="LWB"> LWB</label>
-        <label><input type="checkbox" name="position" value="LB"> LB</label>
-        <label><input type="checkbox" name="position" value="RB"> RB</label>
-        <label><input type="checkbox" name="position" value="RWB"> RWB</label>
-        <label><input type="checkbox" name="position" value="CDM"> CDM</label>
-        <label><input type="checkbox" name="position" value="CM"> CM</label>
-        <label><input type="checkbox" name="position" value="CAM"> CAM</label>
-        <label><input type="checkbox" name="position" value="RM"> RM</label>
-        <label><input type="checkbox" name="position" value="RW"> RW</label>
-        <label><input type="checkbox" name="position" value="LM"> LM</label>
-        <label><input type="checkbox" name="position" value="LW"> LW</label>
-        <label><input type="checkbox" name="position" value="CF"> CF</label>
-        <label><input type="checkbox" name="position" value="ST"> ST</label>
-      </div>
-      <label for="minRating">Min Rating:</label>
-      <input type="number" id="minRating" name="minRating" required value="<%= minRating || '0' %>">
-      <label for="maxRating">Max Rating:</label>
-      <input type="number" id="maxRating" name="maxRating" required value="<%= maxRating || '99' %>">
-      <label for="numPlayers">Number of Players:</label>
-      <input type="number" id="numPlayers" name="numPlayers" required value="<%= numPlayers || '3' %>">
-      <button type="submit">Go</button>
-    </form>
+   <form method="GET" action="/">
+  <div>
+    <label><input type="checkbox" name="position" value="GK" <%= positions.includes('GK') ? 'checked' : '' %>> GK</label>
+    <label><input type="checkbox" name="position" value="CB" <%= positions.includes('CB') ? 'checked' : '' %>> CB</label>
+    <label><input type="checkbox" name="position" value="LWB" <%= positions.includes('LWB') ? 'checked' : '' %>> LWB</label>
+    <label><input type="checkbox" name="position" value="LB" <%= positions.includes('LB') ? 'checked' : '' %>> LB</label>
+    <label><input type="checkbox" name="position" value="RB" <%= positions.includes('RB') ? 'checked' : '' %>> RB</label>
+    <label><input type="checkbox" name="position" value="RWB" <%= positions.includes('RWB') ? 'checked' : '' %>> RWB</label>
+    <label><input type="checkbox" name="position" value="CDM" <%= positions.includes('CDM') ? 'checked' : '' %>> CDM</label>
+    <label><input type="checkbox" name="position" value="CM" <%= positions.includes('CM') ? 'checked' : '' %>> CM</label>
+    <label><input type="checkbox" name="position" value="CAM" <%= positions.includes('CAM') ? 'checked' : '' %>> CAM</label>
+    <label><input type="checkbox" name="position" value="RM" <%= positions.includes('RM') ? 'checked' : '' %>> RM</label>
+    <label><input type="checkbox" name="position" value="RW" <%= positions.includes('RW') ? 'checked' : '' %>> RW</label>
+    <label><input type="checkbox" name="position" value="LM" <%= positions.includes('LM') ? 'checked' : '' %>> LM</label>
+    <label><input type="checkbox" name="position" value="LW" <%= positions.includes('LW') ? 'checked' : '' %>> LW</label>
+    <label><input type="checkbox" name="position" value="CF" <%= positions.includes('CF') ? 'checked' : '' %>> CF</label>
+    <label><input type="checkbox" name="position" value="ST" <%= positions.includes('ST') ? 'checked' : '' %>> ST</label>
+  </div>
+  <label for="minRating">Min Rating:</label>
+  <input type="number" id="minRating" name="minRating" required value="<%= minRating %>">
+  <label for="maxRating">Max Rating:</label>
+  <input type="number" id="maxRating" name="maxRating" required value="<%= maxRating %>">
+  <label for="numPlayers">Number of Players:</label>
+  <input type="number" id="numPlayers" name="numPlayers" required value="<%= numPlayers %>">
+  <button type="submit">Go</button>
+</form>
+
   </div>
   <div class="cards-container">
     <% players.forEach(player=> { %>

@@ -232,7 +232,6 @@ function getCountryISOCode(countryName) {
   }
   return null;
 }
-
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -273,23 +272,26 @@ app.get('/', (req, res) => {
     filteredPlayers = filteredPlayers.sort(() => 0.5 - Math.random()).slice(0, num);
   }
 
-
   filteredPlayers.forEach(player => {
     player.NationISOCode = getCountryISOCode(player.Nation);
   });
 
+  const positions = req.query.position || [];
+  const minRatingValue = req.query.minRating || '0';
+  const maxRatingValue = req.query.maxRating || '99';
+  const numPlayersValue = req.query.numPlayers || '3';
+
   res.render('players', {
     players: filteredPlayers,
-    minRating: minRating,
-    maxRating: maxRating,
-    numPlayers: numPlayers,
-    position: position
+    positions,
+    minRating: minRatingValue,
+    maxRating: maxRatingValue,
+    numPlayers: numPlayersValue
   });
 });
 
-
 app.listen(PORT, () => {
-  console.log(`Server is running on  port ${PORT}`);
+  console.log(`Server is running on port ${PORT}`);
 });
 
 app.get('/health', (req, res) => {
